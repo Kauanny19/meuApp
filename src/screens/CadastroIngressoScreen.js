@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import {View, Text, TextInput, TouchableOpacity, Alert, StyleSheet, Button} from "react-native";
 import api from "../axios/axios";
 
-export default function Login({navigation}) {
-  const [user, setUser] = useState({
-    email: "",
-    password: "",
+export default function CadastrarIngresso({navigation}) {
+  const [ingresso, setIngresso] = useState({
+    preco:"", 
+    tipo:"", 
+    fk_id_evento:"",
   });
 
-  async function handleLogin(){
-    await api.postLogin(user).then(
+  async function handleIngresso(){
+    await api.postIngresso(ingresso).then(
         (response)=>{
             console.log(response.data.message)
             Alert.alert('OK', response.data.message)
@@ -22,23 +23,30 @@ export default function Login({navigation}) {
 
   return(
     <View style={styles.container}>
-        <Text style={styles.title}>Faça Login</Text>
+        <Text style={styles.title}>Cadastre um Ingresso</Text>
         <TextInput 
         style={styles.input}
-        placeholder="Email"
-        value={user.email}
-        onChangeText={(value)=> {setUser({...user, email:value})}}
+        placeholder="Preço"
+        value={ingresso.preco}
+        onChangeText={(value)=> {setIngresso({...ingresso, preco:value})}}
         />
         <TextInput 
         style={styles.input}
-        placeholder="Senha"
-        value={user.password}
-        onChangeText={(value)=> {setUser({...user, password:value})}}
+        placeholder="Tipo"
+        value={ingresso.tipo}
+        onChangeText={(value)=> {setIngresso({...ingresso, tipo:value})}}
         />
-        <TouchableOpacity onPress={handleLogin} style={styles.button}>
-            <Text>Entrar</Text>
+        <TextInput 
+        style={styles.input}
+        placeholder="Id Evento"
+        value={ingresso.fk_id_evento}
+        onChangeText={(value)=> {setIngresso({...ingresso, fk_id_evento:value})}}
+        />
+        
+        <TouchableOpacity onPress={handleIngresso} style={styles.button}>
+            <Text>Cadastrar</Text>
         </TouchableOpacity>
-        <Button title="Cadastro" onPress={()=> navigation.navigate("Cadastro")}/>
+        <Button title="Voltar para Home" onPress={()=> navigation.navigate("Home")}/>
         
     </View>
   )
@@ -65,6 +73,6 @@ const styles = StyleSheet.create({
   button:{
     backgroundColor:'royalblue',
     padding:10,
-    borderRadius:3,
+    borderRadius:5
   }
 });
