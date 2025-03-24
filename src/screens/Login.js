@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import {View, Text, TextInput, TouchableOpacity, Alert, StyleSheet, Button} from "react-native";
 import api from "../axios/axios";
 import {Ionicons} from '@expo/vector-icons';
+import {useNavigation} from '@react-navigation/native';
 
-export default function Login({navigation}) {
+export default function Login() {
+  const navigation = useNavigation();
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -58,17 +60,20 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "white",
+    padding: 20,
+    width:"100%"
   },
   title:{
     fontSize:28,
     fontWeight: 'bold'
   },
   input:{
-    width:'100%',
-    height:40,
+    width: "100%",
+    height: 40,
     borderBottomWidth:1,
-    marginBottom:20,
-    paddingHorizontal:10
+    marginBottom: 20,
+    paddingHorizontal: 10,
   },
   button:{
     backgroundColor:'royalblue',
