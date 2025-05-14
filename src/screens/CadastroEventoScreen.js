@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {View, Text, TextInput, TouchableOpacity, Alert, StyleSheet, Button} from "react-native";
 import api from "../axios/axios";
+import DateTimePicker from "../components/DateTimePicker";
 
 export default function CadastrarEvento({navigation}) {
   const [evento, setEvento] = useState({
@@ -38,12 +39,23 @@ export default function CadastrarEvento({navigation}) {
         value={evento.descricao}
         onChangeText={(value)=> {setEvento({...evento, descricao:value})}}
         />
-        <TextInput 
+        {/* <TextInput 
         style={styles.input}
         placeholder="Data e Hora"
         value={evento.data_hora}
         onChangeText={(value)=> {setEvento({...evento, data_hora:value})}}
+        /> */}
+        <DateTimePicker
+        type={"datetime"}
+        buttonTitle={
+          evento.data_hora === ""
+            ? "Selecione a data do Evento"
+            : evento.data_hora.toLocaleString()
+        }
+        setValue={setEvento}
+        dateKey={"data_hora"}
         />
+        
         <TextInput 
         style={styles.input}
         placeholder="Local"
